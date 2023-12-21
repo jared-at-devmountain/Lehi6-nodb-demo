@@ -34,14 +34,13 @@ export default function Table() {
                 <Header/>
                 <tbody>
                     { tableData.map((jobObj) => {
-                        return <Row
-                            key={jobObj.id}
-                            description={jobObj.description}
-                            rate={jobObj.rate}
-                            hours={jobObj.hours}
-                        />
-                    })
-
+                            return <Row
+                                key={jobObj.id}
+                                description={jobObj.description}
+                                rate={jobObj.rate}
+                                hours={jobObj.hours}
+                            />
+                        })
                     }
                 </tbody>
             </table>
