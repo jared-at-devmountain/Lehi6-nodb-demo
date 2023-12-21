@@ -5,10 +5,14 @@ import AddButton from './AddButton.jsx'
 export default function Table() {
     return (
         <>
-            <Header/>
-            <Row/>
-            <Row/>
-            <Row/>
+            <table>
+                <Header/>
+                <tbody>
+                    <Row description={'Firebreather'} rate={100} hours={60}/>
+                    <Row description={'Shoe Shiner'} rate={120} hours={1}/>
+                    <Row description={'Tent Master'} rate={30} hours={100}/>
+                </tbody>
+            </table>
             <AddButton/>
         </>
     )
