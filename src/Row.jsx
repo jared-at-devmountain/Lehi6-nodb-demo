@@ -4,35 +4,48 @@ export default function Row(props) {
 
     let [isEditing, setIsEditing] = useState(false)
 
+    function handleEditClick() {
+        setIsEditing(!isEditing)
+    }
+
     return (
         <>
             { isEditing
-                ? <>
-                    <EditSaveButton/>
-                    <DescriptionEditingField/>
-                    <RateEditingField/>
-                    <HoursEditingField/>
-                </>
-                : <>
-                    <tr>
-                        <td className={'widecolumn'}>
-                            <button>Delete</button>
-                            <button>Edit</button>
-                        </td>
-                        <td className={'widecolumn'}>
-                            {props.description}
-                        </td>
-                        <td className={'medcolumn'}>
-                            {props.rate}
-                        </td>
-                        <td className={'smallcolumn'}>
-                            {props.hours}
-                        </td>
-                        <td className={'smallcolumn'}>
-                            {props.rate * props.hours}
-                        </td>
-                    </tr>
-                </>
+                ? <tr>
+                    <td>
+                        <EditSaveButton/>
+                    </td>
+                    <td>
+                        <DescriptionEditingField/>
+                    </td>
+                    <td>
+                        <RateEditingField/>
+                    </td>
+                    <td>
+                        <HoursEditingField/>
+                    </td>
+                    <td>
+                        Pending...
+                    </td>
+                </tr>
+                : <tr>
+                    <td className={'widecolumn'}>
+                        <button>Delete</button>
+                        <button onClick={handleEditClick}>Edit</button>
+                    </td>
+                    <td className={'widecolumn'}>
+                        {props.description}
+                    </td>
+                    <td className={'medcolumn'}>
+                        {props.rate}
+                    </td>
+                    <td className={'smallcolumn'}>
+                        {props.hours}
+                    </td>
+                    <td className={'smallcolumn'}>
+                        {props.rate * props.hours}
+                    </td>
+                </tr>
             }
         </>
     )
@@ -41,6 +54,7 @@ export default function Row(props) {
 function EditSaveButton() {
     return(
         <>
+            <button>Save</button>
         </>
     )
 }
@@ -48,6 +62,7 @@ function EditSaveButton() {
 function DescriptionEditingField() {
     return(
         <>
+            Editing description...
         </>
     )
 }
@@ -55,6 +70,7 @@ function DescriptionEditingField() {
 function RateEditingField() {
     return(
         <>
+            Editing rate...
         </>
     )
 }
@@ -62,6 +78,7 @@ function RateEditingField() {
 function HoursEditingField() {
     return(
         <>
+            Editing hours...
         </>
     )
 }
