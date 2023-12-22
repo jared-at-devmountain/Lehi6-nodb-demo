@@ -3,6 +3,9 @@ import { useState } from 'react'
 export default function Row(props) {
 
     let [isEditing, setIsEditing] = useState(false)
+    let [newData, setNewData] = useState({description: props.description, rate: props.rate, hours: props.hours})
+
+    console.log(newData)
 
     function handleEditClick() {
         setIsEditing(!isEditing)
@@ -13,20 +16,31 @@ export default function Row(props) {
             { isEditing
                 ? <tr>
                     <td>
-                        <EditSaveButton/>
+                        <EditSaveButton
+                            newData={newData}
+                            id={props.id}
+                            setTableDataRow={props.setTableDataRow}
+                            setIsEditing={setIsEditing}
+                        />
                     </td>
                     <td>
                         <DescriptionEditingField
+                            setNewData={setNewData}
+                            newData={newData}
                             description={props.description}
                         />
                     </td>
                     <td>
                         <RateEditingField
+                            setNewData={setNewData}
+                            newData={newData}
                             rate={props.rate}
                         />
                     </td>
                     <td>
                         <HoursEditingField
+                            setNewData={setNewData}
+                            newData={newData}
                             hours={props.hours}
                         />
                     </td>
@@ -57,10 +71,18 @@ export default function Row(props) {
     )
 }
 
-function EditSaveButton() {
+function EditSaveButton(props) {
+
+    const {id, newData, setTableDataRow, setIsEditing} = props
+
+    function onSaveClick() {
+        setTableDataRow(id, newData)
+        setIsEditing(false)
+    }
+
     return(
         <>
-            <button>Save</button>
+            <button onClick={onSaveClick}>Save</button>
         </>
     )
 }
@@ -71,6 +93,7 @@ function DescriptionEditingField(props) {
 
     function onChangeHandler(event) {
         setCurrentValue(event.target.value)
+        props.setNewData({...props.newData, description: event.target.value})
     }
     
     return(
@@ -83,9 +106,14 @@ function DescriptionEditingField(props) {
 function RateEditingField(props) {
     const [currentValue, setCurrentValue] = useState(props.rate)
 
+    function onChangeHandler(event) {
+        setCurrentValue(event.target.value)
+        props.setNewData({...props.newData, rate: event.target.value})
+    }
+
     return(
         <>
-            <input type={'number'} value={currentValue} onChange={(e) => setCurrentValue(e.target.value)}/>
+            <input type={'number'} value={currentValue} onChange={onChangeHandler}/>
         </>
     )
 }
@@ -95,6 +123,7 @@ function HoursEditingField(props) {
 
     function onChangeHandler(event) {
         setCurrentValue(event.target.value)
+        props.setNewData({...props.newData, hours: event.target.value})
     }
     
     return(
