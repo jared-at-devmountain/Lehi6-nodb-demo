@@ -33,7 +33,9 @@ export default function Table() {
                     }
                 </tbody>
             </table>
-            <AddButton/>
+            <AddButton
+                setTableData={setTableData}
+            />
         </>
     )
 }

@@ -32,6 +32,17 @@ app.get('/jobs', (req, res) => {
     res.status(200).send(db)
 })
 
+app.post('/job', (req, res) => {
+    let newJob = req.body
+
+    newJob.id = newGlobalId
+    newGlobalId++
+
+    db.push(newJob)
+
+    res.status(200).send(db)
+})
+
 app.put('/edit-job/:id', (req, res) => {
     let id = +req.params.id
     let editedJob = req.body
