@@ -1,11 +1,15 @@
 import { useState } from 'react'
+import axios from 'axios'
 
 export default function Row(props) {
 
     let [isEditing, setIsEditing] = useState(false)
-    let [newData, setNewData] = useState({description: props.description, rate: props.rate, hours: props.hours})
-
-    console.log(newData)
+    let [newData, setNewData] = useState({
+        description: props.description,
+        rate: props.rate,
+        hours: props.hours,
+        id: props.id
+    })
 
     function handleEditClick() {
         setIsEditing(!isEditing)
@@ -19,7 +23,7 @@ export default function Row(props) {
                         <EditSaveButton
                             newData={newData}
                             id={props.id}
-                            setTableDataRow={props.setTableDataRow}
+                            setTableData={props.setTableData}
                             setIsEditing={setIsEditing}
                         />
                     </td>
@@ -73,11 +77,18 @@ export default function Row(props) {
 
 function EditSaveButton(props) {
 
-    const {id, newData, setTableDataRow, setIsEditing} = props
+    const {id, newData, setTableData, setIsEditing} = props
 
     function onSaveClick() {
-        setTableDataRow(id, newData)
-        setIsEditing(false)
+
+        //TODO: start a spinner so that the user knows we are waiting on a network request
+
+        axios.put(`/edit-job/${id}`, newData)
+        .then((response) => {
+            //TODO: stop the spinner
+            setTableData(response.data)
+            setIsEditing(false)
+        })
     }
 
     return(

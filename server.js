@@ -5,6 +5,8 @@ const app = express()
 
 app.use(express.json())
 
+let newGlobalId = 4
+
 const db = [
     {
         description: 'Firebreather',
@@ -29,6 +31,8 @@ const db = [
 app.put('/edit-job/:id', (req, res) => {
     let id = +req.params.id
     let editedJob = req.body
+    editedJob.rate = +editedJob.rate
+    editedJob.hours = +editedJob.hours
 
     for (let i = 0; i < db.length; i++) {
         if (db[i].id === id) {

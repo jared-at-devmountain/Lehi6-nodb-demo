@@ -28,20 +28,6 @@ export default function Table() {
 
     const [tableData, setTableData] = useState(data)
 
-    function setTableDataRow(id, newRowObject) {
-
-        let newTableData = structuredClone(tableData)
-
-        for (let i = 0; i < newTableData.length; i++) {
-            if (newTableData[i].id === id) {
-                newTableData.splice(i, 1, newRowObject)
-                break
-            }
-        }
-
-        setTableData(newTableData)
-    }
-
     return (
         <>
             <table>
@@ -54,7 +40,7 @@ export default function Table() {
                                 rate={jobObj.rate}
                                 hours={jobObj.hours}
                                 id={jobObj.id}
-                                setTableDataRow={setTableDataRow}
+                                setTableData={setTableData}
                             />
                         })
                     }
