@@ -48,5 +48,18 @@ app.put('/edit-job/:id', (req, res) => {
     res.status(200).send(db)
 })
 
+app.delete('/job/:id', (req, res) => {
+    let id = +req.params.id
+
+    for (let i = 0; i < db.length; i++) {
+        if (db[i].id === id) {
+            db.splice(i, 1)
+            break
+        }
+    }
+
+    res.status(200).send(db)
+})
+
 // app.listen(3000, () => {console.log('listening on 3000')})
 ViteExpress.listen(app, 3000, () => {console.log('listening on 3000')})

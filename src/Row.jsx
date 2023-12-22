@@ -15,6 +15,12 @@ export default function Row(props) {
         setIsEditing(!isEditing)
     }
 
+    async function handleDeleteClick() {
+        let response = await axios.delete(`/job/${props.id}`)
+
+        props.setTableData(response.data)
+    }
+
     return (
         <>
             { isEditing
@@ -54,7 +60,7 @@ export default function Row(props) {
                 </tr>
                 : <tr>
                     <td className={'widecolumn'}>
-                        <button>Delete</button>
+                        <button onClick={handleDeleteClick}>Delete</button>
                         <button onClick={handleEditClick}>Edit</button>
                     </td>
                     <td className={'widecolumn'}>
