@@ -16,13 +16,19 @@ export default function Row(props) {
                         <EditSaveButton/>
                     </td>
                     <td>
-                        <DescriptionEditingField/>
+                        <DescriptionEditingField
+                            description={props.description}
+                        />
                     </td>
                     <td>
-                        <RateEditingField/>
+                        <RateEditingField
+                            rate={props.rate}
+                        />
                     </td>
                     <td>
-                        <HoursEditingField/>
+                        <HoursEditingField
+                            hours={props.hours}
+                        />
                     </td>
                     <td>
                         Pending...
@@ -59,26 +65,41 @@ function EditSaveButton() {
     )
 }
 
-function DescriptionEditingField() {
+function DescriptionEditingField(props) {
+    
+    const [currentValue, setCurrentValue] = useState(props.description)
+
+    function onChangeHandler(event) {
+        setCurrentValue(event.target.value)
+    }
+    
     return(
         <>
-            Editing description...
+            <input value={currentValue} onChange={onChangeHandler}/>
         </>
     )
 }
 
-function RateEditingField() {
+function RateEditingField(props) {
+    const [currentValue, setCurrentValue] = useState(props.rate)
+
     return(
         <>
-            Editing rate...
+            <input type={'number'} value={currentValue} onChange={(e) => setCurrentValue(e.target.value)}/>
         </>
     )
 }
 
-function HoursEditingField() {
+function HoursEditingField(props) {
+    const [currentValue, setCurrentValue] = useState(props.hours)
+
+    function onChangeHandler(event) {
+        setCurrentValue(event.target.value)
+    }
+    
     return(
         <>
-            Editing hours...
+            <input type={'number'} value={currentValue} onChange={onChangeHandler}/>
         </>
     )
 }
