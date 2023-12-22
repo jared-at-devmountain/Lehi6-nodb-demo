@@ -28,6 +28,10 @@ const db = [
     }
 ]
 
+app.get('/jobs', (req, res) => {
+    res.status(200).send(db)
+})
+
 app.put('/edit-job/:id', (req, res) => {
     let id = +req.params.id
     let editedJob = req.body
