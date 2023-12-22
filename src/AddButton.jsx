@@ -37,33 +37,33 @@ export default function AddButton({setTableData}) {
         <>
             { isMakingNewRow
                 ? <div>
-                    <span>
+                    <span className={'widecolumn'}>
                         <button onClick={onSaveClickHandler}>Save</button>
                         <button onClick={onCancelClickHandler}>Cancel</button>
                     </span>
-                    <span>
+                    <span className={'widecolumn'}>
                         <input
                             type={'text'}
                             value={descriptionInput}
                             onChange={(e) => setDescriptionInput(e.target.value)}
                         />
                     </span>
-                    <span>
+                    <span className={'smallcolumn'}>
                         <input
                             type={'number'}
                             value={rateInput}
                             onChange={(e) => setRateInput(e.target.value)}
                         />
                     </span>
-                    <span>
+                    <span className={'smallcolumn'}>
                         <input
                             type={'number'}
                             value={hoursInput}
                             onChange={(e) => setHoursInput(e.target.value)}
                         />
                     </span>
-                    <span>
-                        Will be calculated...
+                    <span className={'smallcolumn'}>
+                        <span>Pending...</span>
                     </span>
                 </div>
                 : <button onClick={onAddClickHandler} className="add-button">

@@ -69,14 +69,21 @@ button:focus-visible {
 
 .widecolumn {
   width: 200px;
+  display: inline-block;
 }
 
 .medcolumn {
   width: 100px;
+  display: inline-block;
 }
 
 .smallcolumn {
   width: 80px;
+  display: inline-block;
+}
+
+span > input {
+  max-width: 80%;
 }
 
 button {
